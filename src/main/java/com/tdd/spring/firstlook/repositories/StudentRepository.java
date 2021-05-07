@@ -17,6 +17,13 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
   @Query("FROM Student")
   List<Student> findAllStudents(Pageable pageable);
 
+  @Query(value = "SELECT * FROM STUDENT", nativeQuery = true)
+  List<Student> findAllStudentsNQ();
+
+  @Query(value = "SELECT * FROM STUDENT as students " +
+      "WHERE students.fname = :FirstName", nativeQuery = true)
+  List<Student> findByFirstNameNQ(@Param("FirstName") String firstName);
+
   @Query("SELECT student.firstName, student.lastName FROM Student as student")
   List<Object[]> findAllStudentsPartialData();
 

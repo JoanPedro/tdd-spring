@@ -83,6 +83,18 @@ class StudentRepositoryTest {
   }
 
   @Test
+  void testStudentJPQL8() {
+    List<Student> students = studentRepository.findAllStudentsNQ();
+    assertEquals(3, students.size());
+  }
+
+  @Test
+  void testStudentJPQL9() {
+    List<Student> students = studentRepository.findByFirstNameNQ("Joan Pedro");
+    assertEquals(1, students.size());
+  }
+
+  @Test
   @Transactional
   void testStudentJPQL6() {
     studentRepository.deleteStudentsByFirstName("Joan Pedro");
