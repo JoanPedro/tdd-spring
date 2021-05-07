@@ -4,6 +4,10 @@ import com.tdd.spring.firstlook.domain.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -187,4 +191,107 @@ class ProductRepositoryTest {
 
     assertEquals(2, pByPrice.size());
   }
+
+  @Test
+  @Transactional
+  void testCustomListByIdsInPageable() {
+    Product p1 = new Product(null, "Computer", "An awesome Laptop", 3000.00);
+    Product p2 = new Product(null, "Table", "An great table", 2100.00);
+    Product p3 = new Product(null, "Chair", "It's confortable", 3300.00);
+
+    productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+    Sort.Order order1 = new Sort.Order(Sort.Direction.DESC, "name");
+    Sort.Order order2 = new Sort.Order(Sort.Direction.ASC, "price");
+
+    Sort sortable = Sort.by(Arrays.asList(order1, order2));
+
+    // Page 0, 1 record per page
+    Pageable pageable = PageRequest.of(0, 2, sortable);
+
+    List<Product> pByPrice = productRepository.findByIdIn(Arrays.asList(1, 2), pageable);
+
+    assertEquals(2, pByPrice.size());
+  }
+
+  @Test
+  @Transactional
+  void testFindAllPageable() {
+    Product p1 = new Product(null, "Computer", "An awesome Laptop", 3000.00);
+    Product p2 = new Product(null, "Table", "An great table", 2100.00);
+    Product p3 = new Product(null, "Chair", "It's confortable", 3300.00);
+
+    productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+    // Page 0, 1 record per page
+    Pageable pageable = PageRequest.of(0, 1);
+
+    Page<Product> resultPage = productRepository.findAll(pageable);
+
+    assertEquals(1, resultPage.getSize());
+    assertEquals(3, resultPage.getTotalPages());
+    assertEquals(3, resultPage.getTotalElements());
+  }
+
+  @Test
+  @Transactional
+  void testFindAllSorting() {
+    Product p1 = new Product(null, "Computer", "An awesome Laptop", 3000.00);
+    Product p2 = new Product(null, "Table", "An great table", 2100.00);
+    Product p3 = new Product(null, "Chair", "It's confortable", 3300.00);
+
+    productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+    Sort sortable = Sort.by(Sort.Direction.DESC, "price");
+
+    List<Product> products = productRepository.findAll(sortable);
+
+    assertEquals(3, products.size());
+    assertEquals(3300.00, products.get(0).getPrice());
+  }
+
+  @Test
+  @Transactional
+  void testFindAllMultipleSorting() {
+    Product p1 = new Product(null, "Computer", "An awesome Laptop", 3000.00);
+    Product p2 = new Product(null, "Table", "An great table", 2100.00);
+    Product p3 = new Product(null, "Chair", "It's confortable", 3300.00);
+
+    productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+    Sort.Order order1 = new Sort.Order(Sort.Direction.DESC, "name");
+    Sort.Order order2 = new Sort.Order(Sort.Direction.ASC, "price");
+
+    Sort sortable = Sort.by(Arrays.asList(order1, order2));
+
+    List<Product> products = productRepository.findAll(sortable);
+
+    assertEquals(3, products.size());
+    assertEquals(2100.00, products.get(0).getPrice());
+  }
+
+  @Test
+  @Transactional
+  void testFindAllPageableSortable() {
+    Product p1 = new Product(null, "Computer", "An awesome Laptop", 3000.00);
+    Product p2 = new Product(null, "Table", "An great table", 2100.00);
+    Product p3 = new Product(null, "Chair", "It's confortable", 3300.00);
+
+    productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+    Sort.Order order1 = new Sort.Order(Sort.Direction.DESC, "name");
+    Sort.Order order2 = new Sort.Order(Sort.Direction.ASC, "price");
+
+    Sort sortable = Sort.by(Arrays.asList(order1, order2));
+
+    // Page 0, 1 record per page
+    Pageable pageable = PageRequest.of(0, 1, sortable);
+
+    Page<Product> resultPage = productRepository.findAll(pageable);
+
+    assertEquals(1, resultPage.getSize());
+    assertEquals(3, resultPage.getTotalPages());
+    assertEquals(3, resultPage.getTotalElements());
+  }
+
 }
