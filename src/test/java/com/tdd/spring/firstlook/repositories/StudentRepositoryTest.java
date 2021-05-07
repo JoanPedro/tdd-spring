@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,6 +71,15 @@ class StudentRepositoryTest {
     List<Student> students = studentRepository.findAllStudentsByScoreRange(70, 80);
 
     assertEquals(1, students.size());
+  }
+
+  @Test
+  void testStudentJPQL7() {
+    Sort sort = Sort.by(Sort.Direction.DESC, "score");
+    Pageable pageable = PageRequest.of(0, 3, sort);
+    List<Student> students = studentRepository.findAllStudents(pageable);
+
+    assertEquals(3, students.size());
   }
 
   @Test

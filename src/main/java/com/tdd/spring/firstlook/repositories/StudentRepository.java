@@ -1,6 +1,7 @@
 package com.tdd.spring.firstlook.repositories;
 
 import com.tdd.spring.firstlook.domain.Student;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
   @Query("FROM Student")
   List<Student> findAllStudents();
+
+  @Query("FROM Student")
+  List<Student> findAllStudents(Pageable pageable);
 
   @Query("SELECT student.firstName, student.lastName FROM Student as student")
   List<Object[]> findAllStudentsPartialData();
