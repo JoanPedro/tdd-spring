@@ -7,21 +7,21 @@ import javax.persistence.Entity;
 // Define witch data will be used to persist
 @DiscriminatorValue("CC")
 public class CreditCard extends Payment {
-  private String creditCard;
+  private String cardNumber;
 
   public CreditCard() {
 
   }
 
   public CreditCard(String creditCard) {
-    this.creditCard = creditCard;
+    this.cardNumber = creditCard;
   }
 
-  public String getCreditCard() {
-    return creditCard;
+  public String getCardNumber() {
+    return cardNumber;
   }
 
-  public void setCreditCard(String creditCard) {
-    this.creditCard = creditCard;
+  public void setCardNumber(String cardNumber) {
+    this.cardNumber = cardNumber;
   }
 }

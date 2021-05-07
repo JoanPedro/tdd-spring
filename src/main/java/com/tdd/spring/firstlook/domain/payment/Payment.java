@@ -11,23 +11,23 @@ public abstract class Payment implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
-  private Integer id;
+  private Long id;
 
   private Double amount;
 
   Payment() {
   }
 
-  Payment(Integer id, Double amount) {
+  Payment(Long id, Double amount) {
     this.id = id;
     this.amount = amount;
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
