@@ -89,7 +89,7 @@ class StudentRepositoryTest {
   }
 
   @Test
-  void testStudentJPQL9() {
+  void testStudentJPQL9 () {
     List<Student> students = studentRepository.findByFirstNameNQ("Joan Pedro");
     assertEquals(1, students.size());
   }
