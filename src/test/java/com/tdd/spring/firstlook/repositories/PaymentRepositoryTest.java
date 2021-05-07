@@ -1,6 +1,6 @@
 package com.tdd.spring.firstlook.repositories;
 
-import com.tdd.spring.firstlook.domain.payment.Check;
+import com.tdd.spring.firstlook.domain.payment.CheckBolt;
 import com.tdd.spring.firstlook.domain.payment.CreditCard;
 import com.tdd.spring.firstlook.domain.payment.Payment;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +11,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
@@ -23,8 +25,8 @@ class PaymentRepositoryTest {
   void setup() {
     List<Payment> payments = paymentRepository.findAll();
     if (payments.isEmpty()) {
-      CreditCard cc = new CreditCard("1234567890");
-      Check ch = new Check("0987654321");
+      CreditCard cc = new CreditCard(null, 10000.00, "1234567890");
+      CheckBolt ch = new CheckBolt(null, 20000.00, "0987654321");
       paymentRepository.saveAll(Arrays.asList(cc, ch));
     }
   }
@@ -32,6 +34,7 @@ class PaymentRepositoryTest {
   @Test
   void Tests() {
     Payment ccResult = paymentRepository.findById(1L).get();
+    assertNotNull(ccResult);
     System.out.println(ccResult);
   }
 }

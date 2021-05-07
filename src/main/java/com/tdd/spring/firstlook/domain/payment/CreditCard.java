@@ -1,20 +1,28 @@
 package com.tdd.spring.firstlook.domain.payment;
 
-import javax.persistence.DiscriminatorValue;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
-// Define witch data will be used to persist
-@DiscriminatorValue("CC")
+@Table
+@PrimaryKeyJoinColumn(name = "id")
+@JsonTypeName("CC")
 public class CreditCard extends Payment {
+
+  @Column
   private String cardNumber;
+
+  public CreditCard(Long id, Double amount, String cardNumber) {
+    super(id, amount);
+    this.cardNumber = cardNumber;
+  }
 
   public CreditCard() {
 
-  }
-
-  public CreditCard(String creditCard) {
-    this.cardNumber = creditCard;
   }
 
   public String getCardNumber() {
