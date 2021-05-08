@@ -10,7 +10,10 @@ import java.util.Set;
 public class Customer implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+  // EAGER: WILL JOIN THE ASSOCIATION IN ADVANCE.
+  // LAZY: ONLY JOIN THE ASSOCIATION WHEN GET PHONE_NUMBERS WAS CALLED. (DEFAULT)
+
+  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private final Set<PhoneNumber> phoneNumbers = new HashSet<>();
 
   @Id
