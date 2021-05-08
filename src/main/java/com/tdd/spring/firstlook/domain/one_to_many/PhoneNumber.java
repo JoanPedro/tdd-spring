@@ -15,6 +15,7 @@ public class PhoneNumber implements Serializable {
 
   private String type;
 
+  // Inverse-Side Relationship
   @ManyToOne
   @JoinColumn(name = "customer_id")
   private Customer customer;

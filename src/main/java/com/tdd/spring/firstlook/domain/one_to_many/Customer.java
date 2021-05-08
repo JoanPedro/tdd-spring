@@ -13,7 +13,11 @@ public class Customer implements Serializable {
   // EAGER: WILL JOIN THE ASSOCIATION IN ADVANCE.
   // LAZY: ONLY JOIN THE ASSOCIATION WHEN GET PHONE_NUMBERS WAS CALLED. (DEFAULT)
 
-  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @OneToMany(
+      mappedBy = "customer",
+      cascade = CascadeType.ALL,
+      fetch = FetchType.EAGER
+  )
   private final Set<PhoneNumber> phoneNumbers = new HashSet<>();
 
   @Id
