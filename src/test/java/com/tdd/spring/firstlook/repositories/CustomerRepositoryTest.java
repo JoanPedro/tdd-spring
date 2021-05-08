@@ -1,7 +1,7 @@
 package com.tdd.spring.firstlook.repositories;
 
-import com.tdd.spring.firstlook.domain.Customer;
-import com.tdd.spring.firstlook.domain.PhoneNumber;
+import com.tdd.spring.firstlook.domain.one_to_many.Customer;
+import com.tdd.spring.firstlook.domain.one_to_many.PhoneNumber;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

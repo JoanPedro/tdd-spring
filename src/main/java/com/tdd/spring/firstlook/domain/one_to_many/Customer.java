@@ -1,4 +1,4 @@
-package com.tdd.spring.firstlook.domain;
+package com.tdd.spring.firstlook.domain.one_to_many;
 
 import javax.persistence.*;
 import java.io.Serializable;

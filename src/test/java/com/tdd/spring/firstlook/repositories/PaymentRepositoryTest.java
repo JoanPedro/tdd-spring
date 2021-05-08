@@ -1,8 +1,8 @@
 package com.tdd.spring.firstlook.repositories;
 
-import com.tdd.spring.firstlook.domain.payment.CheckBolt;
-import com.tdd.spring.firstlook.domain.payment.CreditCard;
-import com.tdd.spring.firstlook.domain.payment.Payment;
+import com.tdd.spring.firstlook.domain.payment_inheritance.CheckBolt;
+import com.tdd.spring.firstlook.domain.payment_inheritance.CreditCard;
+import com.tdd.spring.firstlook.domain.payment_inheritance.Payment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

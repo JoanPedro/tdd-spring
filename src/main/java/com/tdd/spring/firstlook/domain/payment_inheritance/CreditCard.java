@@ -1,4 +1,4 @@
-package com.tdd.spring.firstlook.domain.payment;
+package com.tdd.spring.firstlook.domain.payment_inheritance;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
