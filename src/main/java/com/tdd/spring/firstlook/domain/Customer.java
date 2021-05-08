@@ -47,6 +47,13 @@ public class Customer implements Serializable {
     this.name = name;
   }
 
+  public void addPhoneNumbers(Iterable<PhoneNumber> pNumbers) {
+    pNumbers.forEach(phoneNumber -> {
+      this.getPhoneNumbers().add(phoneNumber);
+      phoneNumber.setCustomer(this);
+    });
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

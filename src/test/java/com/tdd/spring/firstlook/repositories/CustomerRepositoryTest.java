@@ -24,12 +24,8 @@ class CustomerRepositoryTest {
   void testOne() {
     Customer c = new Customer(null, "Joan Pedro Oliveira de Souza");
     PhoneNumber p1 = new PhoneNumber(null, "1234567890", "Cellphone");
-    p1.setCustomer(c);
-
     PhoneNumber p2 = new PhoneNumber(null, "0987654321", "Fixed Phone");
-    p2.setCustomer(c);
-
-    c.getPhoneNumbers().addAll(Arrays.asList(p1, p2));
+    c.addPhoneNumbers(Arrays.asList(p1, p2));
 
     customerRepository.save(c);
 
