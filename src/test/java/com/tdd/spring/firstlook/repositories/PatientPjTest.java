@@ -1,21 +1,20 @@
-package com.tdd.spring.firstlook;
+package com.tdd.spring.firstlook.repositories;
 
 import com.tdd.spring.firstlook.domain.patient_pj.Appointment;
 import com.tdd.spring.firstlook.domain.patient_pj.Doctor;
 import com.tdd.spring.firstlook.domain.patient_pj.Insurance;
 import com.tdd.spring.firstlook.domain.patient_pj.Patient;
-import com.tdd.spring.firstlook.repositories.DoctorRepository;
-import com.tdd.spring.firstlook.repositories.PatientRepository;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-@SpringBootApplication
-public class FirstlookApplication implements CommandLineRunner {
+@SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+class PatientPjTest {
 
   @Autowired
   DoctorRepository doctorRepository;
@@ -23,12 +22,11 @@ public class FirstlookApplication implements CommandLineRunner {
   @Autowired
   PatientRepository patientRepository;
 
-  public static void main(String[] args) {
-    SpringApplication.run(FirstlookApplication.class, args);
-  }
+  @Autowired
+  AppointmentRepository appointmentRepository;
 
-  @Override
-  public void run(String... args) throws Exception {
+  @Test
+  void IntegrationTest() {
     Doctor d1 = new Doctor(null, "Bharath", "Vanir", "Cardiologist");
     Doctor d2 = new Doctor(null, "Khatywl", "Mohantm", "Podiatrist");
     Doctor d3 = new Doctor(null, "Mhakaty", "Polythean", "Generalist");
