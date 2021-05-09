@@ -1,10 +1,13 @@
-package com.tdd.spring.firstlook.domain.one_to_one;
+package com.tdd.spring.firstlook.domain.transaction;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Person implements Serializable {
+public class BankAccount implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
@@ -12,21 +15,19 @@ public class Person implements Serializable {
   private Long id;
 
   private String firstName;
+
   private String lastName;
-  private Integer age;
 
-  // Inverse-Side Relationship
-  @OneToOne(mappedBy = "person")
-  private License license;
+  private Double balance;
 
-  public Person() {
+  public BankAccount() {
   }
 
-  public Person(Long id, String firstName, String lastName, Integer age) {
+  public BankAccount(Long id, String firstName, String lastName, Double balance) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.age = age;
+    this.balance = balance;
   }
 
   public Long getId() {
@@ -53,19 +54,11 @@ public class Person implements Serializable {
     this.lastName = lastName;
   }
 
-  public Integer getAge() {
-    return age;
+  public Double getBalance() {
+    return balance;
   }
 
-  public void setAge(Integer age) {
-    this.age = age;
-  }
-
-  public License getLicense() {
-    return license;
-  }
-
-  public void setLicense(License license) {
-    this.setLicense(license);
+  public void setBalance(Double balance) {
+    this.balance = balance;
   }
 }
